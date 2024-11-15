@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Function to clone the repository
+clone_repo() {
+    local repo_url="$1"
+    local base_dir="$HOME/projects"
+
+    # Extract the path from the repo URL
+    repo_path=$(echo "$repo_url" | sed -E 's|https?://([^/]+)/|\1/|; s|\.git$||')
+
+    # Create the full destination path
+    dest_path="$base_dir/$repo_path"
+
+    # Create the directory if it doesn't exist
+    mkdir -p "$dest_path"
+
+    # Clone the repository into the destination path
+    git clone "$repo_url" "$dest_path"
+
+    # Add the directory to zoxide
+    if command -v zoxide &> /dev/null; then
+        zoxide add "$dest_path"
+        echo "Added '$dest_path' to zoxide"
+    else
+        echo "zoxide is not installed, skipping zoxide add"
+    fi
+}
+
+# Check if a repository URL is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <repository-url>"
+    exit 1
+fi
+
+# Call the clone_repo function with the provided URL
+clone_repo "$1"

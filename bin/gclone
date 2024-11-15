@@ -1,0 +1,14 @@
+#!/bin/bash
+
+gitCheckoutProject() {
+	local project="$1"
+
+	gh search repos --owner=liatrio --archived=false "$project" | gum choose | awk '{print "https://github.com/" $1 ".git"}' | xargs clone
+}
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 <project name snippet>"
+	exit 1
+fi
+
+gitCheckoutProject "$1"

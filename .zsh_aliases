@@ -1,0 +1,37 @@
+alias dots="source ~/.zprofile"
+alias edots="vim ~/.zsh_aliases"
+
+alias ll="ls -laF"
+
+# Git
+alias gs="git status"
+alias gd="git diff"
+alias gc="git commit"
+alias gco="git checkout"
+alias gcm="git commit -m"
+alias ga="git add -p"
+alias glg="git log -p"
+alias gds="git diff --cached"
+alias gp="git push"
+alias gaa="git add"
+alias gcob="git checkout -b "
+alias gcom="git checkout main"
+
+# Gum / Git & You
+alias gcop="gh pr list | cut -f1,2,3 | gum choose | cut -f1 | xargs gh pr checkout"
+alias gcob="git branch -r | head -50 | grep -v 'HEAD' | sed 's/origin\///g' | gum choose | xargs git checkout"
+
+# Github
+alias getDefaultBranch="gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'"
+
+# Projects
+alias ggp="cd ~/projects"
+
+# Taskfile
+alias t="task"
+
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+
+alias k=kubectl
